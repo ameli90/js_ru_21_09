@@ -13,7 +13,7 @@ class Article extends Component {
             date: PropTypes.string.isRequired
         }).isRequired,
         isOpen: PropTypes.bool,
-        onClick: PropTypes.func
+        onButtonClick: PropTypes.func
     }
 
     render() {
