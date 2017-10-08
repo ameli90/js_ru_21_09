@@ -10,11 +10,14 @@ class ArticleList extends Accordion {
     }
 
     render() {
-        const {articles} = this.props
+        const {articles, selected} = this.props
+        const selectedIds = selected.map( ({ value }) => value );
+        const filteredArticles = selectedIds.length ? articles.filter(a => selectedIds.includes(a.id)) : articles;
+
         if (this.state.error) return <h2>Error: {this.state.error.message}</h2>
         if (!articles.length) return <h3>No Articles</h3>
 
-        const articleElements = articles.map((article) => <li key={article.id}>
+        const articleElements = filteredArticles.map((article) => <li key={article.id}>
             <Article article={article}
                      isOpen={article.id === this.state.openItemId}
                      onButtonClick={this.toggleOpenItemMemoized(article.id)}
@@ -39,9 +42,11 @@ ArticleList.defaultProps = {
 }
 
 ArticleList.propTypes = {
-    articles: PropTypes.array.isRequired
+    articles: PropTypes.array.isRequired,
+    selected: PropTypes.array.isRequired,
 }
 
-export default connect((state) => ({
-    articles: state.articles
+export default connect(({articles, filters: { selected }}) => ({
+    articles,
+    selected
 }))(ArticleList)
