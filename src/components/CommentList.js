@@ -30,7 +30,7 @@ class CommentList extends Component {
 }
 
 function getBody(props) {
-    const {comments, isOpen} = props
+    const {comments, isOpen, article} = props
     if (!isOpen) return null
 
     const body = comments.length ? (
@@ -42,18 +42,20 @@ function getBody(props) {
     return (
         <div>
             {body}
-            <CommentForm />
+            <CommentForm article={article}/>
         </div>
     )
 }
 
 
 CommentList.defaultProps = {
-    comments: []
+    comments: [],
+    article: null
 }
 
 CommentList.propTypes = {
-    comments: PropTypes.array.isRequired
+    comments: PropTypes.array.isRequired,
+    article: PropTypes.object.isRequired
 }
 
 export default toggleOpen(CommentList)
