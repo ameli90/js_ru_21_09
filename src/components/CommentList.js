@@ -17,7 +17,8 @@ class CommentList extends Component {
     static contextTypes = {
         store: PropTypes.object,
         router: PropTypes.object,
-        user: PropTypes.string
+        user: PropTypes.string,
+        dictionary: PropTypes.object,
     }
 
     componentWillReceiveProps({ isOpen, article, loadArticleComments }) {
@@ -28,8 +29,9 @@ class CommentList extends Component {
 
     render() {
         console.log('---', 4)
+        const {dictionary} = this.context
         const {isOpen, toggleOpen} = this.props
-        const text = isOpen ? 'hide comments' : 'show comments'
+        const text = isOpen ? dictionary['HIDE_COMMENTS'] : dictionary['SHOW_COMMENTS']
         return (
             <div>
                 <h3>{this.context.user}</h3>

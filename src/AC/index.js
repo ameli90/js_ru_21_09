@@ -1,5 +1,5 @@
 import {INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, LOAD_ALL_ARTICLES,
-    LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, LOAD_COMMENTS_FOR_PAGE, START, SUCCESS, FAIL} from '../constants'
+    LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, LOAD_COMMENTS_FOR_PAGE, START, SUCCESS, FAIL, CHANGE_LANG} from '../constants'
 import {replace} from 'react-router-redux'
 
 export function increment() {
@@ -100,5 +100,12 @@ export function checkAndLoadCommentsForPage(page) {
             payload: { page },
             callAPI: `/api/comment?limit=5&offset=${(page - 1) * 5}`
         })
+    }
+}
+
+export function changeLang(lang) {
+    return {
+        type: CHANGE_LANG,
+        payload: { lang }
     }
 }

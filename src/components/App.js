@@ -6,6 +6,9 @@ import CommentsPage from './routes/CommentsPage'
 import Filters from './Filters'
 import Counter from './Counter'
 import Menu, {MenuItem} from './Menu'
+import LangSwitcher from './LangSwitcher'
+import lang from '../lang'
+import {connect} from 'react-redux'
 
 class App extends Component {
     state = {
@@ -13,12 +16,18 @@ class App extends Component {
     }
 
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        dictionary: PropTypes.object,
+    }
+
+    static defaultProps = {
+        lang: PropTypes.string.isRequired,
     }
 
     getChildContext() {
         return {
-            user: this.state.username
+            user: this.state.username,
+            dictionary: lang[this.props.lang]
         }
     }
 
@@ -35,6 +44,7 @@ class App extends Component {
                     <MenuItem to = '/counter'>counter</MenuItem>
                     <MenuItem to = '/comments/1'>comments</MenuItem>
                 </Menu>
+                <LangSwitcher />
                 User: <input type = 'text' value = {username} onChange = {this.handleUserChange}/>
                 <Switch>
                     <Redirect from = '/' exact to = '/articles'/>
@@ -64,4 +74,8 @@ class App extends Component {
     }
 }
 
-export default App
+export default connect(state => {
+    return  {
+        lang: state.locale.lang,
+    }
+})(App)

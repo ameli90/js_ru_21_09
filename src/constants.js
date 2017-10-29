@@ -14,3 +14,5 @@ export const CHANGE_DATE_RANGE = 'CHANGE_DATE_RANGE'
 export const START = '_START'
 export const SUCCESS = '_SUCCESS'
 export const FAIL = '_FAIL'
+
+export const CHANGE_LANG = 'CHANGE_LANG'
